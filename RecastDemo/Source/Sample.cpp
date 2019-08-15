@@ -194,8 +194,8 @@ void Sample::resetCommonSettings()
 void Sample::handleCommonSettings()
 {
 	imguiLabel("Rasterization");
-	imguiSlider("Cell Size", &m_cellSize, 0.1f, 50.0f, 0.01f);
-	imguiSlider("Cell Height", &m_cellHeight, 0.1f, 50.0f, 0.01f);
+	imguiSlider("Cell Size", &m_cellSize, 0.1f, 50.0f, 0.5f);
+	imguiSlider("Cell Height", &m_cellHeight, 0.1f, 50.0f, 0.5f);
 	
 	if (m_geom)
 	{
@@ -210,9 +210,9 @@ void Sample::handleCommonSettings()
 	
 	imguiSeparator();
 	imguiLabel("Agent");
-	imguiSlider("Height", &m_agentHeight, 0.1f, 50.0f, 0.1f);
-	imguiSlider("Radius", &m_agentRadius, 0.0f, 50.0f, 0.1f);
-	imguiSlider("Max Climb", &m_agentMaxClimb, 0.1f, 50.0f, 0.1f);
+	imguiSlider("Height", &m_agentHeight, 0.1f, 50.0f, 0.5f);
+	imguiSlider("Radius", &m_agentRadius, 0.0f, 50.0f, 0.5f);
+	imguiSlider("Max Climb", &m_agentMaxClimb, 0.1f, 50.0f, 0.5f);
 	imguiSlider("Max Slope", &m_agentMaxSlope, 0.0f, 90.0f, 1.0f);
 	
 	imguiSeparator();
