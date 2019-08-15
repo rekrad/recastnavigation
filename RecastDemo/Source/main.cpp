@@ -252,6 +252,10 @@ int main(int /*argc*/, char** /*argv*/)
 					break;
 				
 				case SDL_MOUSEWHEEL:
+					BuildSettings settings;
+					memset(&settings, 0, sizeof(settings));
+					sample->collectSettings(settings);
+
 					if (event.wheel.y < 0)
 					{
 						// wheel down
@@ -261,7 +265,7 @@ int main(int /*argc*/, char** /*argv*/)
 						}
 						else
 						{
-							scrollZoom += 1.0f;
+							scrollZoom += 1.0f * settings.mouseWheelSpeed;
 						}
 					}
 					else
@@ -272,7 +276,7 @@ int main(int /*argc*/, char** /*argv*/)
 						}
 						else
 						{
-							scrollZoom -= 1.0f;
+							scrollZoom -= 1.0f * settings.mouseWheelSpeed;
 						}
 					}
 					break;
@@ -462,8 +466,15 @@ int main(int /*argc*/, char** /*argv*/)
 		moveRight	= rcClamp(moveRight	+ dt * 4 * ((keystate[SDL_SCANCODE_D] || keystate[SDL_SCANCODE_RIGHT	]) ? 1 : -1), 0.0f, 1.0f);
 		moveUp		= rcClamp(moveUp	+ dt * 4 * ((keystate[SDL_SCANCODE_Q] || keystate[SDL_SCANCODE_PAGEUP	]) ? 1 : -1), 0.0f, 1.0f);
 		moveDown	= rcClamp(moveDown	+ dt * 4 * ((keystate[SDL_SCANCODE_E] || keystate[SDL_SCANCODE_PAGEDOWN	]) ? 1 : -1), 0.0f, 1.0f);
-		
-		float keybSpeed = 22.0f;
+	
+		float keybSpeed = 0;
+		if (sample)
+		{
+			BuildSettings settings;
+			memset(&settings, 0, sizeof(settings));
+			sample->collectSettings(settings);
+			keybSpeed = settings.keyCameraSpeed;
+		}
 		if (SDL_GetModState() & KMOD_SHIFT)
 		{
 			keybSpeed *= 4.0f;

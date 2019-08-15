@@ -62,6 +62,10 @@ struct BuildSettings
 	float detailSampleMaxError;
 	// Partition type, see SamplePartitionType
 	int partitionType;
+	// liyh: Mouse wheel scroll camera speed
+	float mouseWheelSpeed;
+	// liyh: Key "wasd" camera speed
+	float keyCameraSpeed;
 	// Bounds of the area to mesh
 	float navMeshBMin[3];
 	float navMeshBMax[3];

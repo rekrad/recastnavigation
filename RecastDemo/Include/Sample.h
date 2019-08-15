@@ -119,6 +119,8 @@ protected:
 	float m_vertsPerPoly;
 	float m_detailSampleDist;
 	float m_detailSampleMaxError;
+	float m_mouseWheelSpeed;
+	float m_keyCameraSpeed;
 	int m_partitionType;
 
 	bool m_filterLowHangingObstacles;

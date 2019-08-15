@@ -145,6 +145,8 @@ void Sample::handleMeshChanged(InputGeom* geom)
 		m_detailSampleDist = buildSettings->detailSampleDist;
 		m_detailSampleMaxError = buildSettings->detailSampleMaxError;
 		m_partitionType = buildSettings->partitionType;
+		m_mouseWheelSpeed = buildSettings->mouseWheelSpeed;
+		m_keyCameraSpeed = buildSettings->keyCameraSpeed;
 	}
 }
 
@@ -164,16 +166,18 @@ void Sample::collectSettings(BuildSettings& settings)
 	settings.detailSampleDist = m_detailSampleDist;
 	settings.detailSampleMaxError = m_detailSampleMaxError;
 	settings.partitionType = m_partitionType;
+	settings.mouseWheelSpeed = m_mouseWheelSpeed;
+	settings.keyCameraSpeed = m_keyCameraSpeed;
 }
 
 
 void Sample::resetCommonSettings()
 {
-	m_cellSize = 0.3f;
-	m_cellHeight = 0.2f;
-	m_agentHeight = 2.0f;
-	m_agentRadius = 0.6f;
-	m_agentMaxClimb = 0.9f;
+	m_cellSize = 20.f;
+	m_cellHeight = 20.f;
+	m_agentHeight = 20.f;
+	m_agentRadius = 15.f;
+	m_agentMaxClimb = 20.f;
 	m_agentMaxSlope = 45.0f;
 	m_regionMinSize = 8;
 	m_regionMergeSize = 20;
@@ -182,14 +186,16 @@ void Sample::resetCommonSettings()
 	m_vertsPerPoly = 6.0f;
 	m_detailSampleDist = 6.0f;
 	m_detailSampleMaxError = 1.0f;
+	m_mouseWheelSpeed = 30.f;
+	m_keyCameraSpeed = 1000.f;
 	m_partitionType = SAMPLE_PARTITION_WATERSHED;
 }
 
 void Sample::handleCommonSettings()
 {
 	imguiLabel("Rasterization");
-	imguiSlider("Cell Size", &m_cellSize, 0.1f, 1.0f, 0.01f);
-	imguiSlider("Cell Height", &m_cellHeight, 0.1f, 1.0f, 0.01f);
+	imguiSlider("Cell Size", &m_cellSize, 0.1f, 50.0f, 0.01f);
+	imguiSlider("Cell Height", &m_cellHeight, 0.1f, 50.0f, 0.01f);
 	
 	if (m_geom)
 	{
@@ -204,9 +210,9 @@ void Sample::handleCommonSettings()
 	
 	imguiSeparator();
 	imguiLabel("Agent");
-	imguiSlider("Height", &m_agentHeight, 0.1f, 5.0f, 0.1f);
-	imguiSlider("Radius", &m_agentRadius, 0.0f, 5.0f, 0.1f);
-	imguiSlider("Max Climb", &m_agentMaxClimb, 0.1f, 5.0f, 0.1f);
+	imguiSlider("Height", &m_agentHeight, 0.1f, 50.0f, 0.1f);
+	imguiSlider("Radius", &m_agentRadius, 0.0f, 50.0f, 0.1f);
+	imguiSlider("Max Climb", &m_agentMaxClimb, 0.1f, 50.0f, 0.1f);
 	imguiSlider("Max Slope", &m_agentMaxSlope, 0.0f, 90.0f, 1.0f);
 	
 	imguiSeparator();
@@ -242,6 +248,11 @@ void Sample::handleCommonSettings()
 	imguiLabel("Detail Mesh");
 	imguiSlider("Sample Distance", &m_detailSampleDist, 0.0f, 16.0f, 1.0f);
 	imguiSlider("Max Sample Error", &m_detailSampleMaxError, 0.0f, 16.0f, 1.0f);
+
+	imguiSeparator();
+	imguiLabel("Camera");
+	imguiSlider("MouseWheel", &m_mouseWheelSpeed, 0.0f, 100.0f, 1.0f);
+	imguiSlider("Key(WASD)", &m_keyCameraSpeed, 0.0f, 2000.0f, 1.0f);
 	
 	imguiSeparator();
 }
