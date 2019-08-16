@@ -720,7 +720,7 @@ void NavMeshTesterTool::recalc()
 				m_navQuery->closestPointOnPoly(m_startRef, m_spos, iterPos, 0);
 				m_navQuery->closestPointOnPoly(polys[npolys-1], m_epos, targetPos, 0);
 				
-				static const float STEP_SIZE = 0.5f;
+				static const float STEP_SIZE = 15.f;
 				static const float SLOP = 0.01f;
 				
 				m_nsmoothPath = 0;
